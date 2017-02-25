@@ -1,3 +1,4 @@
+#!/bin/bash
 #this function will convert text to lowercase and will disconnect punctuation and special symbols from words
 function normalize_text {
   awk '{print tolower($0);}' < $1 | sed -e 's/\./ \. /g' -e 's/<br \/>/ /g' -e 's/"/ " /g' \
@@ -14,6 +15,8 @@ for j in train/pos train/neg test/pos test/neg train/unsup; do
   mv temp-norm aclImdb/$j/norm.txt
   rm temp
 done
+
+mkdir data
 
 mv aclImdb/train/pos/norm.txt data/full-train-pos.txt
 mv aclImdb/train/neg/norm.txt data/full-train-neg.txt
